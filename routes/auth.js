@@ -1,15 +1,15 @@
 const { Router } = require('express');
-
+const UserModel = require('./../models/users')
 const router = Router();
 
 router.get('/login', (req, res) => {
-
     res.render('login.ejs', { status: 200 });
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    // TODO: Connect to database
+    const user = await UserModel.findOne({ username: username })
+    console.log(user)
     if (username === 'admin' && password === '1234') {
         // res.setHeader('Set-Cookie', 'loggedin=true')
         return res.redirect('/');

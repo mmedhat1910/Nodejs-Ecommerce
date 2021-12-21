@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config()
+const mongoose = require('mongoose');
 
 var app = express();
 
@@ -51,9 +52,15 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT} 🚀 `)
-})
+const url = process.env.DB_URL
+mongoose.connect(url)
+  .then(result => {
+    console.log('Database running successfully');
+    app.listen(PORT, () => {
+      console.log(`App running on port ${PORT} 🚀 `)
+    })
+  })
+  .catch(err => console.log(err))
 
 
 // res.send("Text");
