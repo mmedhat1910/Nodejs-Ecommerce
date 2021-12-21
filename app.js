@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+require('dotenv').config()
 
 var app = express();
+
+const authRoutes = require('./routes/auth')
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,9 +21,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', (req, res) => {
-  res.render('books.ejs')
+
+
+
+app.get('/', (req, res) => {
+  const loggedin = req.cookies.loggedin
+  //todo: convert this into boolean
+  if (loggedin == 'false') {
+    return res.redirect('/login');
+  }
+  return res.render('home.ejs', { name: 'hello' })
 });
+
+app.use('/', authRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -44,3 +54,9 @@ app.use(function (err, req, res, next) {
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT} 🚀 `)
 })
+
+
+// res.send("Text");
+// res.json();
+// res.redirect('/');
+// res.render('');

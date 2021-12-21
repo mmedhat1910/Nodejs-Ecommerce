@@ -17,4 +17,5 @@ To start app in production mode run:
 ```bash
 npm start
 ```
- 
+
+### Cheat Sheet
