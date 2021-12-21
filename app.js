@@ -21,8 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', (req, res) => {
+  res.render('books.ejs')
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -41,5 +42,5 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(PORT, () => {
-  console.log(`App running on port ${PORT} 🚀`)
+  console.log(`App running on port ${PORT} 🚀 `)
 })

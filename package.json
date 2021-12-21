@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js -e js,ejs,html -w . -w public -w views -w routes -w models app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

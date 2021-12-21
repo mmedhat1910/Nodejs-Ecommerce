@@ -1,0 +1,42 @@
+body {
+  background-image: url('background3.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+h1 {
+  color: white;
+  text-align: center;
+  -webkit-text-stroke: 1px blue;
+}
+.container1 {
+  position: fixed;
+  left: 50px;
+  top: 150px;
+  color: white;
+}
+.container2 {
+  position: fixed;
+  left: 300px;
+  top: 150px;
+  color: white;
+  width: 300px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.video {
+  position: fixed;
+  left: 700px;
+  top: 150px;
+  color: white;
+  width: 300px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.cart {
+  position: fixed;
+  left: 30px;
+  top: 470px;
+}
+#my {
+  zoom: 110%;
+}
