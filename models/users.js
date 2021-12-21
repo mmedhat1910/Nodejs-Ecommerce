@@ -16,15 +16,17 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: false
+        required: false,
+        default: null
     },
     phoneNumber: {
         type: String,
-        required: false
+        required: false,
+        default: null
     }
 });
 
-const UserModel = model('User', UserSchema);
+const UserModel = model('user', UserSchema);
 
 
 module.exports = UserModel

@@ -8,13 +8,18 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    //todo
     const user = await UserModel.findOne({ username: username })
-    console.log(user)
-    if (username === 'admin' && password === '1234') {
-        // res.setHeader('Set-Cookie', 'loggedin=true')
-        return res.redirect('/');
+
+    if (!user) {
+        return res.render('login.ejs', { status: 404 });
     }
-    return res.render('login.ejs', { status: 401 });
+    else if (password !== user.password) {
+        return res.render('login.ejs', { status: 401 });
+    }
+    res.setHeader('Set-Cookie', 'loggedin=true')
+    return res.redirect('/');
+
 })
 
 router.get('/register', (req, res) => {
