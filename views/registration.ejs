@@ -19,6 +19,9 @@
         color: white;
         -webkit-text-stroke: 0.5px black;
       }
+      .error-alert {
+        max-width: 300px;
+      }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,6 +40,16 @@
       <h1>Registration</h1>
     </div>
     <div class="cont">
+      <% if (status === 409) { %>
+      <div class="alert alert-danger error-alert" role="alert">
+        User Already Exists
+      </div>
+      <% } else if (status === 400){ %>
+      <div class="alert alert-danger error-alert" role="alert">
+        An Error has occurred. Please try again.
+      </div>
+      <% } %>
+
       <form method="post" action="/register">
         Username: <br />
         <input type="text" id="user" name="username" /> <br />
