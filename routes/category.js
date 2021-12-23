@@ -3,6 +3,7 @@ const router = Router();
 
 router.get('category/:category',(req, res)=>{
     const category=req.params.category;
+    console.log(category);
     return res.render('phones.ejs',{Status:200});
 })
 

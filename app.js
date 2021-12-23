@@ -10,6 +10,7 @@ var app = express();
 
 const authRoutes = require('./routes/auth');
 const insertions = require('./insertions');
+const categoryRoutes=require('./routes/category');
 
 const PORT = process.env.PORT || 3000;
 
@@ -60,11 +61,11 @@ mongoose.connect(url)
     app.listen(PORT, () => {
       console.log(`App running on port ${PORT} 🚀 `)
     })
-    // insertions();
+    //insertions();
   })
   .catch(err => console.log(err))
 
-
+app.use('/category/:category',categoryRoutes);
 // res.send("Text");
 // res.json();
 // res.redirect('/');
