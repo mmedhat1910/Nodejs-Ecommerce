@@ -6,10 +6,18 @@ const router = Router();
 router.get('/:id', async (req, res) => {
     const itemId = req.params.id;
     console.log(itemId)
+    try {
+        const item = await itemModel.findOne({ _id: itemId});
+         // res.json(item);
+         // console.log(item);
+
+    res.render('galaxy.ejs',{item});
+    }catch(e){
+        console.log(e);
+    }
+
+   
     
-    const item = await itemModel.findOne({ _id: itemId});
-    res.json(item);
-    console.log(item);
 })
 
 
