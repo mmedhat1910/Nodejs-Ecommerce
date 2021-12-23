@@ -1,0 +1,9 @@
+[
+  {
+    "name": "IPhone",
+    "description": "Very expensive phone",
+    "img": "/images/iphone.jpg",
+    "price": 13000,
+    "category": "phones"
+  }
+]

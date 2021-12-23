@@ -1,0 +1,14 @@
+[
+  {
+    "name": "phones",
+    "img": "/images/phones.png"
+  },
+  {
+    "name": "books",
+    "img": "/images/books.png"
+  },
+  {
+    "name": "sports",
+    "img": "/images/sports.png"
+  }
+]
