@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   const loggedin = req.cookies.loggedin
   //todo: convert this into boolean
-  if (loggedin == 'false') {
+  if (loggedin=='false') {
     return res.redirect('/login');
   }
   return res.render('home.ejs', { name: 'hello' })
