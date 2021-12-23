@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 var app = express();
 
 const authRoutes = require('./routes/auth');
-const insertions = require('./insertions');
+const itemRoutes = require('./routes/item');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/', authRoutes);
+app.use('/item',itemRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -60,7 +62,7 @@ mongoose.connect(url)
     app.listen(PORT, () => {
       console.log(`App running on port ${PORT} 🚀 `)
     })
-    // insertions();
+    //  insertions();
   })
   .catch(err => console.log(err))
 
