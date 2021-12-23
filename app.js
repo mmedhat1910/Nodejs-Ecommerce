@@ -8,7 +8,8 @@ const mongoose = require('mongoose');
 
 var app = express();
 
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/auth');
+const insertions = require('./insertions');
 
 const PORT = process.env.PORT || 3000;
 
@@ -59,6 +60,7 @@ mongoose.connect(url)
     app.listen(PORT, () => {
       console.log(`App running on port ${PORT} 🚀 `)
     })
+    // insertions();
   })
   .catch(err => console.log(err))
 
