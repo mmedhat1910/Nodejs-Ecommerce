@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
         await Promise.all(cart.items.map(async (itemID) => {
             const i = await ItemModel.findOne({ _id: itemID });
             items.push(i);
-        }))
+        }));
         if (cart) {
             res.render('cart.ejs', { cart: items });
         } else {
