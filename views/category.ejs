@@ -57,43 +57,15 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-      <a class="navbar-brand" style="color: rgb(191, 255, 161)">Phones</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto"></ul>
-        <form method="POST" action="/search" class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            name="Search"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-    </nav>
-    <% itemList.map((item, index)=> { %>
+    <%- include('partials/_navbar', {title: 'Category'}) %>
+    <%itemList.map((item, index)=> { %>
     <div class="container<%= index+1%>">
       <img src="<%= item.img %>" width="193" height="300" />
       <br />
       <label id="label1" class="ml-4 my-2"> <%= item.name%> </label>
       <br />
       <button
-        onclick="location.href='/item/<%=item.name%>' "
+        onclick="location.href='/item/<%=item._id%>' "
         id="<%=item.name%>"
         class="btn btn-secondary ml-3"
       >
