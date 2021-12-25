@@ -38,6 +38,9 @@ app.get('/', (req, res) => {
 
 app.use('/', authRoutes);
 
+
+app.use('/category',categoryRoutes);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -65,7 +68,6 @@ mongoose.connect(url)
   })
   .catch(err => console.log(err))
 
-app.use('/category/:category',categoryRoutes);
 // res.send("Text");
 // res.json();
 // res.redirect('/');
