@@ -66,12 +66,30 @@
     </div>
     <div class="container2"><%= item.description %></div>
     <div class="cart">
-      <button id="cart" class="btn btn-secondary ml-3">Add to Cart</button>
+      <button
+        id="cart"
+        class="btn btn-secondary ml-3"
+        onclick="addToCart('<%= item._id %>')"
+      >
+        Add to Cart
+      </button>
     </div>
     <div class="video">
       <video width="480" height="360" controls>
         <source src="/galaxy.mp4" />
       </video>
     </div>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      const addToCart = async (itemId) => {
+        const res = await axios({
+          url: '/cart',
+          method: 'POST',
+          data: { item: itemId },
+        });
+      };
+    </script>
   </body>
 </html>

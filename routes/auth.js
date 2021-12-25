@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const UserModel = require('./../models/users');
+const CartModel = require('./../models/cart');
 const bcrypt = require('bcrypt');
 const req = require('express/lib/request');
 const router = Router();
@@ -10,7 +11,6 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    //todo
     const user = await UserModel.findOne({ username: username });
     const isPasswordCorrect = await bcrypt.compare(user.password, password);
     if (!user) {
@@ -19,8 +19,8 @@ router.post('/login', async (req, res) => {
     else if (isPasswordCorrect) {
         return res.render('login.ejs', { status: 401 });
     }
-    //TODO: Cookie not working
-    res.setHeader('Set-Cookie', `loggedin=true;username=${username}`);
+
+    res.setHeader('Set-Cookie', ['loggedin=true', `username=${username}`]);
     return res.redirect('/');
 
 })
@@ -37,8 +37,9 @@ router.post('/register', async (req, res) => {
     } else {
         try {
             const hashPassword = await bcrypt.hash(password, 10);
-            await UserModel.create({ username: username, password: hashPassword });
-            res.setHeader('Set-Cookie', `loggedin=true;username=${username}`);
+            const newUser = await UserModel.create({ username: username, password: hashPassword });
+            await CartModel.create({ user_id: newUser._id, items: [] });
+            res.setHeader('Set-Cookie', ['loggedin=true', `username=${username}`]);
             res.redirect('/');
         } catch (e) {
             return res.render('registration.ejs', { status: 400 });

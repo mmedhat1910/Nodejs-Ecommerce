@@ -13,7 +13,7 @@ const authRoutes = require('./routes/auth');
 const itemRoutes = require('./routes/item');
 const categoryRoutes = require('./routes/category');
 const searchRoutes = require('./routes/search');
-
+const cartRoutes = require('./routes/cart')
 
 const PORT = process.env.PORT || 3000;
 
@@ -51,7 +51,7 @@ app.use('/', authRoutes);
 app.use('/item', itemRoutes);
 app.use('/category', categoryRoutes);
 app.use('/search', searchRoutes);
-
+app.use('/cart', cartRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

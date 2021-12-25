@@ -4,7 +4,7 @@ const itemModel = require('../models/item');
 const router = Router();
 
 router.get('/', (req, res) => {
-    res.render('searchresults.ejs', { results: ["Hello"] })
+    res.render('searchresults.ejs', { results: [] })
 });
 
 
