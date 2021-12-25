@@ -10,9 +10,13 @@ var app = express();
 
 const authRoutes = require('./routes/auth');
 
+const itemRoutes = require('./routes/item');
+
+
 const categoryRoutes = require('./routes/category');
 
 const categoryModel = require('./models/category');
+
 
 
 const PORT = process.env.PORT || 3000;
@@ -48,6 +52,7 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/', authRoutes);
+app.use('/item',itemRoutes);
 
 
 app.use('/category', categoryRoutes);
@@ -75,7 +80,6 @@ mongoose.connect(url)
     app.listen(PORT, () => {
       console.log(`App running on port ${PORT} 🚀 `)
     })
-
   })
   .catch(err => console.log(err))
 
