@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 var app = express();
 
 const authRoutes = require('./routes/auth');
-const insertions = require('./insertions');
-const categoryRoutes=require('./routes/category');
+// const insertions = require('./insertions');
+const categoryRoutes = require('./routes/category');
 
 const PORT = process.env.PORT || 3000;
 
@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   const loggedin = req.cookies.loggedin
   //todo: convert this into boolean
-  if (loggedin=='false') {
+  if (loggedin == 'false') {
     return res.redirect('/login');
   }
   return res.render('home.ejs', { name: 'hello' })
@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 app.use('/', authRoutes);
 
 
-app.use('/category',categoryRoutes);
+app.use('/category', categoryRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
