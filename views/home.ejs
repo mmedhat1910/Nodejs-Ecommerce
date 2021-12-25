@@ -89,6 +89,16 @@
     <div class="container">
       <h1>Welcome</h1>
     </div>
+    <!-- Starting from here -->
+    <% categories.map((category) => { %>
+    </div>
+          <%= category.name %>
+          <img src='<%=category.img%>'/>
+      </div>
+      <% } %>
+      <% ) %>
+      
+
     <div class="container1">
       <img id="image" src="/images/phones.png" width="100" height="100" />
       <br />
