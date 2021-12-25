@@ -9,8 +9,11 @@ const mongoose = require('mongoose');
 var app = express();
 
 const authRoutes = require('./routes/auth');
-// const insertions = require('./insertions');
+
 const categoryRoutes = require('./routes/category');
+
+const categoryModel = require('./models/category');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,13 +30,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const loggedin = req.cookies.loggedin
   //todo: convert this into boolean
   if (loggedin == 'false') {
     return res.redirect('/login');
   }
-  return res.render('home.ejs', { name: 'hello' })
+
+  const categories = await categoryModel.find();
+  // console.log(categories);
+  if (categories) {
+    res.render('home.ejs', { categories: categories });
+  }
+
+
+  //return res.render('home.ejs', { name: 'hello' })
 });
 
 app.use('/', authRoutes);
@@ -64,7 +75,7 @@ mongoose.connect(url)
     app.listen(PORT, () => {
       console.log(`App running on port ${PORT} 🚀 `)
     })
-    //insertions();
+
   })
   .catch(err => console.log(err))
 
