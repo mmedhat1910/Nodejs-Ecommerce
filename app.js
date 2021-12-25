@@ -35,8 +35,8 @@ app.get('/', async (req, res) => {
 
   const categories = await categoryModel.find();
   // console.log(categories);
-  if (categories){
-  res.render('home.ejs',{categories:categories});
+  if (categories) {
+    res.render('home.ejs', { categories: categories });
   }
 
 
