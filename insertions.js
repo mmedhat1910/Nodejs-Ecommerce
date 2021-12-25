@@ -1,4 +1,5 @@
 
+
 // const itemModel = require('./models/item')
 // const categoryModel = require('./models/category')
 // const insertions = async () => {
@@ -52,6 +53,7 @@
 //     //         "qty": 4
 //     //     }
 //     // ]);
+
 //     await categoryModel.insertMany([
 //         {
 //             "name": "phones",
@@ -69,3 +71,4 @@
 // }
 
 // module.exports = insertions();
+
