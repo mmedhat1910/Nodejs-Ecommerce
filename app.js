@@ -5,18 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config()
 const mongoose = require('mongoose');
+const categoryModel = require('./models/category');
 
 var app = express();
 
 const authRoutes = require('./routes/auth');
-
 const itemRoutes = require('./routes/item');
-
-
 const categoryRoutes = require('./routes/category');
-
-const categoryModel = require('./models/category');
-
+const searchRoutes = require('./routes/search');
 
 
 const PORT = process.env.PORT || 3000;
@@ -52,10 +48,10 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/', authRoutes);
-app.use('/item',itemRoutes);
-
-
+app.use('/item', itemRoutes);
 app.use('/category', categoryRoutes);
+app.use('/search', searchRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -83,7 +79,3 @@ mongoose.connect(url)
   })
   .catch(err => console.log(err))
 
-// res.send("Text");
-// res.json();
-// res.redirect('/');
-// res.render('');

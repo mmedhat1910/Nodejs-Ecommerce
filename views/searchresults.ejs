@@ -3,9 +3,9 @@
   <head>
     <style>
       body {
-        background-image: url('background3.jpg');
+        background-image: url('/images/background3.jpg');
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: cover;
       }
 
       h1 {
@@ -26,36 +26,38 @@
     />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-      <a class="navbar-brand" style="color: rgb(191, 255, 161)"
-        >Search Results</a
-      >
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto"></ul>
-        <form method="POST" action="/search" class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            name="Search"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
+    <%- include('partials/_navbar', {title: 'Search Results'}) %>
+    <div class="container p-5">
+      <div class="row">
+        <% if(results.length > 0){ %> <% results.map((item) => { %>
+        <div class="col-4">
+          <div class="card" style="width: 16rem">
+            <img
+              src="<%=item.img%>"
+              class="card-img-top img-fluid"
+              alt="<%=item.name%>"
+              height="40"
+              width="30"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%=item.name%></h5>
+              <p class="card-text"><%= item.description %></p>
+              <button
+                onclick="location.href='/item/<%=item._id%>' "
+                id="<%=item.name%>"
+                class="btn btn-secondary"
+              >
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+        <% }); %> <% } else { %>
+        <div class="col-12">
+          <h1>Item not found</h1>
+        </div>
+        <%}%>
       </div>
-    </nav>
+    </div>
   </body>
 </html>
