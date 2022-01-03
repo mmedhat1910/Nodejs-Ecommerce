@@ -12,11 +12,13 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await UserModel.findOne({ username: username });
-    const isPasswordCorrect = await bcrypt.compare(user.password, password);
+
     if (!user) {
         return res.render('login.ejs', { status: 404 });
     }
-    else if (isPasswordCorrect) {
+
+    const isPasswordCorrect = await bcrypt.compare(user.password, password);
+    if (isPasswordCorrect) {
         return res.render('login.ejs', { status: 401 });
     }
 
@@ -42,6 +44,7 @@ router.post('/register', async (req, res) => {
             res.setHeader('Set-Cookie', ['loggedin=true', `username=${username}`]);
             res.redirect('/');
         } catch (e) {
+            console.log(e);
             return res.render('registration.ejs', { status: 400 });
         }
     }
