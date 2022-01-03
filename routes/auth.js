@@ -17,11 +17,10 @@ router.post('/login', async (req, res) => {
         return res.render('login.ejs', { status: 404 });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(user.password, password);
-    if (isPasswordCorrect) {
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
         return res.render('login.ejs', { status: 401 });
     }
-
     res.setHeader('Set-Cookie', ['loggedin=true', `username=${username}`]);
     return res.redirect('/');
 

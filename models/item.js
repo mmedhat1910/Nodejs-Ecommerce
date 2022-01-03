@@ -25,6 +25,10 @@ const itemSchema = new Schema({
     qty: {
         type: Number,
         required: true
+    },
+    video: {
+        type: String,
+        required: true
     }
 
 

@@ -75,21 +75,51 @@
       </button>
     </div>
     <div class="video">
-      <video width="480" height="360" controls>
-        <source src="/galaxy.mp4" />
-      </video>
+      <iframe
+        width="560"
+        height="315"
+        src="<%= item.video %>"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
-    <script src="./node_modules/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <div class="alert alert-danger" width="200" id="alert"></div>
 
     <script>
+      const message = document.getElementById('alert');
+      message.style.display = 'none';
       const addToCart = async (itemId) => {
-        const res = await axios({
-          url: '/cart',
-          method: 'POST',
-          data: { item: itemId },
-        });
+        try {
+          const res = await axios({
+            url: '/cart',
+            method: 'POST',
+            data: { item: itemId },
+          });
+          console.log(res.status);
+          if (res.status === 200) {
+            message.style.display = 'block';
+            message.innerHTML = 'Item Added Successfully !';
+            message.classList = 'alert alert-success';
+            setTimeout(() => {
+              message.style.display = 'none';
+            }, 2000);
+          }
+        } catch (e) {
+          console.log(e);
+          message.style.display = 'block';
+          message.innerHTML = 'Item Already in cart !';
+          message.classList = 'alert alert-danger';
+          setTimeout(() => {
+            message.style.display = 'none';
+          }, 2000);
+        }
       };
     </script>
+
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

@@ -30,11 +30,20 @@ router.post('/', async (req, res) => {
     try {
         const user = await UserModel.findOne({ username: username });
         const cart = await CartModel.findOne({ user_id: user._id.toString() });
+        if (cart && user) {
 
-        const newItems = [...cart.items, item];
-        console.log(newItems)
-        const addToCartRes = await CartModel.updateOne({ _id: cart._id }, { items: newItems });
-        console.log(addToCartRes);
+            if (cart.items.includes(item)) {
+                return res.status(409).json({ msg: "Already in cart" });
+            }
+            const newItems = [...cart.items, item];
+            console.log(newItems)
+            const addToCartRes = await CartModel.updateOne({ _id: cart._id }, { items: newItems });
+            console.log(addToCartRes);
+            return res.status(200).json({ msg: "Added Successfully" });
+        } else {
+            //TODO: check here
+            return res.status(404).json({ msg: "Not Found" });
+        }
     } catch (err) {
         console.error(err);
     }
