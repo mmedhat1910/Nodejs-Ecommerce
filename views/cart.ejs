@@ -14,7 +14,8 @@
       }
       .card-btn {
         position: absolute;
-        bottom: 1rem;
+        bottom: 0.8rem;
+        left: 1rem;
       }
     </style>
     <meta charset="UTF-8" />
@@ -70,8 +71,10 @@
                       >Category: <%= item.category %>
                     </small>
                   </p>
-                  <p class="card-text"><%= item.description %></p>
-                  <a href="" class="btn btn-primary">View Item</a>
+                  <%= item.description.length > 100 ?
+                  item.description.substring(0, 80) + "...." : item.description
+                  %>
+                  <a href="" class="btn btn-primary card-btn">View Item</a>
                 </div>
               </div>
             </div>
@@ -84,5 +87,6 @@
         <%}%>
       </div>
     </div>
+    <script></script>
   </body>
 </html>
