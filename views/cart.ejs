@@ -5,32 +5,31 @@
       body {
         background-image: url('/images/background3.jpg');
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: cover;
+        height: 100%;
       }
-
-      h1 {
-        color: white;
-        text-align: center;
-        -webkit-text-stroke: 1px blue;
+      .card-body {
+        position: relative;
+        height: 100%;
+      }
+      .card-btn {
+        position: absolute;
+        bottom: 1rem;
       }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Cart</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <%- include('partials/_head') %>
   </head>
   <body>
-    <%- include('partials/_navbar', {title: 'Cart'}) %>
-    <div class="container p-5">
-      <div class="row">
+    <%- include('partials/_navbar') %>
+    <div class="container p-4">
+      <div class="display-5 text-white mb-3">Cart</div>
+      <div class="row gx-3">
         <% if(cart.length > 0){ %> <% cart.map((item) => { %>
-        <div class="col-4">
+        <!-- <div class="col-4">
           <div class="card" style="width: 16rem">
             <img
               src="<%=item.img%>"
@@ -51,10 +50,36 @@
               </button>
             </div>
           </div>
+        </div> -->
+        <div class="col-md-6">
+          <div class="card mb-3 p-2">
+            <div class="row g-0">
+              <div class="col-md-4 text-center">
+                <img
+                  src="<%=item.img%>"
+                  class="rounded-start"
+                  alt="<%=item.name%>"
+                  height="200"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title"><%= item.name %></h4>
+                  <p class="card-text">
+                    <small class="text-muted"
+                      >Category: <%= item.category %>
+                    </small>
+                  </p>
+                  <p class="card-text"><%= item.description %></p>
+                  <a href="" class="btn btn-primary">View Item</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <% }); %> <% } else { %>
         <div class="col-12">
-          <h1>No Items in cart</h1>
+          <h1 class="display-5">No Items in cart</h1>
         </div>
         <%}%>
       </div>

@@ -64,7 +64,9 @@ app.use('/cart', cartRoutes);
 
 
 
-
+app.get('/*', (req, res) => {
+  res.render('error.ejs');
+})
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
@@ -85,10 +87,13 @@ app.use('/cart', cartRoutes);
 const url = process.env.DB_URL
 mongoose.connect(url)
   .then(result => {
-    console.log('Database running successfully');
+    console.log("================================================")
+    console.log('Database running successfully ');
     app.listen(PORT, () => {
       console.log(`App running on port ${PORT} 🚀 `)
+      console.log("================================================")
     })
+
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 

@@ -5,13 +5,10 @@
       body {
         background-image: url('/images/background3.jpg');
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: cover;
+        min-height: 100vh;
       }
-      h1 {
-        color: white;
-        text-align: center;
-        -webkit-text-stroke: 1px blue;
-      }
+      /*
       .cont {
         position: relative;
         left: 600px;
@@ -41,51 +38,72 @@
         position: fixed;
         left: 80px;
         top: 370px;
-      }
+      }*/
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Products</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <%- include('partials/_head') %>
+    <title>Store Categories| GoShop</title>
   </head>
 
   <body>
-    <%- include('partials/_navbar', {title: 'Logo'}) %>
+    <%- include('partials/_navbar', {title: 'GoShop'}) %>
     <div class="container">
-      <h1>Welcome</h1>
-    </div>
-    <!-- Starting from here -->
-    <% categories.map((category, index) => { %> <% console.log(category) %>
-    <div class="container<%= index+1 %>">
-      <img id="image" src="<%=category.img%>" width="100" height="100" />
-      <br />
-      <label class="ml-4 my-2"><%= category.name %></label>
-      <br />
-      <button
-        onclick="location.href = '/category/<%= category.name%>';"
-        id="<%= category.name%>"
-        class="btn btn-secondary ml-3"
-      >
-        View
-      </button>
-    </div>
-    <% }); %>
+      <h1 class="text-white display-3 text-center m-3">Welcome</h1>
 
-    <div class="cart">
-      <button
-        onclick="location.href = '/cart';"
-        id="cart"
-        class="btn btn-secondary ml-3"
-        style="width: 300px"
-      >
-        Cart
-      </button>
+      <!-- Starting from here -->
+      <div class="container">
+        <div class="row justify-content-center">
+          <% categories.map((category, index) => { %> <% console.log(category)
+          %>
+          <!-- <div class="container<%= index+1 %>">
+          <img id="image" src="<%=category.img%>" width="100" height="100" />
+          <br />
+          <label class="ml-4 my-2"><%= category.name %></label>
+          <br />
+          <button
+            onclick="location.href = '/category/<%= category.name%>';"
+            id="<%= category.name%>"
+            class="btn btn-secondary ml-3"
+          >
+            View
+          </button>
+        </div> -->
+
+          <div class="col-md-3 col-sm-6 m-2">
+            <div class="card text-center" style="max-width: 18rem">
+              <img
+                src="<%=category.img%>"
+                class="card-img-top"
+                alt="<%= category.name%>"
+              />
+              <div class="card-body">
+                <h5 class="card-title"><%= category.name.toUpperCase() %></h5>
+
+                <button
+                  onclick="location.href = '/category/<%= category.name%>';"
+                  id="<%= category.name%>"
+                  class="btn btn-success ml-auto w-100 mt-2"
+                >
+                  View
+                </button>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <!-- <div class="cart">
+          <button
+            onclick="location.href = '/cart';"
+            id="cart"
+            class="btn btn-secondary ml-3"
+            style="width: 300px"
+          >
+            Cart
+          </button>
+        </div> -->
+      </div>
     </div>
   </body>
 </html>
