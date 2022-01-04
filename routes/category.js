@@ -7,7 +7,7 @@ router.get('/:category', async (req, res) => {
     try {
         const itemList = await itemModel.find({ category: category });
         if (itemList && itemList.length > 0) {
-            return res.render('category.ejs', { itemList: itemList });
+            return res.render('category.ejs', { category: category, itemList: itemList });
         }
     } catch (err) {
         console.error(err);

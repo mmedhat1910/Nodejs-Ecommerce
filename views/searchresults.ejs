@@ -18,37 +18,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Search Results</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <%- include('partials/_head') %>
   </head>
   <body>
     <%- include('partials/_navbar', {title: 'Search Results'}) %>
     <div class="container p-5">
-      <div class="row">
+      <div class="row gx-3">
         <% if(results.length > 0){ %> <% results.map((item) => { %>
-        <div class="col-4">
-          <div class="card" style="width: 16rem">
-            <img
-              src="<%=item.img%>"
-              class="card-img-top img-fluid"
-              alt="<%=item.name%>"
-              height="40"
-              width="30"
-            />
-            <div class="card-body">
-              <h5 class="card-title"><%=item.name%></h5>
-              <p class="card-text"><%= item.description %></p>
-              <button
-                onclick="location.href='/item/<%=item._id%>' "
-                id="<%=item.name%>"
-                class="btn btn-secondary"
-              >
-                View
-              </button>
+        <div class="col-md-6">
+          <div class="card mb-3 p-2">
+            <div class="row g-0">
+              <div class="col-md-4 text-center">
+                <img
+                  src="<%=item.img%>"
+                  class="rounded-start"
+                  alt="<%=item.name%>"
+                  height="200"
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title"><%= item.name %></h4>
+                  <p class="card-text">
+                    <small class="text-muted"
+                      >Category: <%= item.category %>
+                    </small>
+                  </p>
+                  <p class="card-text"><%= item.description %></p>
+                  <a href="" class="btn btn-primary card-btn">View Item</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

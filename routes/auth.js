@@ -6,6 +6,7 @@ const req = require('express/lib/request');
 const router = Router();
 
 router.get('/login', (req, res) => {
+    res.setHeader('Set-Cookie', ['loggedin=false', `username=null`]);
     res.render('login.ejs', { status: 200 });
 })
 
@@ -14,11 +15,13 @@ router.post('/login', async (req, res) => {
     const user = await UserModel.findOne({ username: username });
 
     if (!user) {
+        res.setHeader('Set-Cookie', ['loggedin=false', `username=null`]);
         return res.render('login.ejs', { status: 404 });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
+        res.setHeader('Set-Cookie', ['loggedin=false', `username=null`]);
         return res.render('login.ejs', { status: 401 });
     }
     res.setHeader('Set-Cookie', ['loggedin=true', `username=${username}`]);

@@ -3,67 +3,100 @@
   <head>
     <style>
       body {
-        background-image: url('/images/background2.jpg');
+        background-image: url('/images/background1.jpg');
         background-repeat: no-repeat;
-        background-size: 100%;
-      }
-      h1 {
-        color: white;
-        text-align: center;
-        -webkit-text-stroke: 1px blue;
-      }
-      .cont {
+        background-size: cover;
+        height: 100vh;
+        display: grid;
+        place-content: center;
+        width: 100%;
         position: relative;
-        left: 600px;
-        top: 50px;
-        color: white;
-        -webkit-text-stroke: 0.5px black;
       }
+
       .error-alert {
         max-width: 300px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+      }
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3);
+        z-index: -1;
+      }
+      .content {
+        background-color: rgba(0, 0, 0, 0.509);
+
+        min-width: 30vw;
+        border-radius: 10px;
+      }
+      #register {
+        text-align: center;
       }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Registration</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <%- include('partials/_head') %>
   </head>
 
   <body>
-    <div class="container">
-      <h1>Registration</h1>
+    <div class="bg"></div>
+    <% if (status === 409) { %>
+    <div class="alert alert-danger error-alert" role="alert">
+      User Already Exists
     </div>
-    <div class="cont">
-      <% if (status === 409) { %>
-      <div class="alert alert-danger error-alert" role="alert">
-        User Already Exists
-      </div>
-      <% } else if (status === 400){ %>
-      <div class="alert alert-danger error-alert" role="alert">
-        An Error has occurred. Please try again.
-      </div>
-      <% } %>
+    <% } else if (status === 400){ %>
+    <div class="alert alert-danger error-alert" role="alert">
+      An Error has occurred. Please try again.
+    </div>
+    <% } %>
 
+    <div class="content p-5 text-white">
+      <div class="container">
+        <h1 class="text-center display-5 mb-5">Register</h1>
+      </div>
       <form method="post" action="/register">
-        Username: <br />
-        <input type="text" id="user" name="username" required /> <br />
-        Password: <br />
-        <input type="password" id="password" name="password" required /> <br />
-        <br />
+        <div class="mb-3">
+          <label for="username" class="form-label"> Username </label>
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            placeholder="Enter your username"
+            required
+            oninvalid="this.setCustomValidity('Please enter your username')"
+            oninput="this.setCustomValidity('')"
+          />
+        </div>
+        <label for="password" class="form-label"> Password </label>
         <input
-          type="submit"
-          id="simple_click"
-          class="btn btn-secondary"
-          value="Register"
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter your password"
+          required
+          oninvalid="this.setCustomValidity('Please enter your password')"
+          oninput="this.setCustomValidity('')"
         />
-        <br />
+        <div class="text-center mt-5">
+          <input
+            class="btn btn-primary w-50 p-2"
+            id="register"
+            type="submit"
+            value="Register"
+          />
+        </div>
       </form>
+      <br />
+      <div class="text-center">
+        <a href="/login" class="text-white">Already have an account?</a>
+      </div>
     </div>
   </body>
 </html>

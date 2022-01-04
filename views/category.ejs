@@ -5,73 +5,57 @@
       body {
         background-image: url('/images/background3.jpg');
         background-repeat: no-repeat;
-        background-size: 100%;
-      }
-      h1 {
-        color: white;
-        text-align: center;
-        -webkit-text-stroke: 1px blue;
-      }
-      .cont {
-        position: relative;
-        left: 600px;
-        top: 50px;
-        color: white;
-        -webkit-text-stroke: 0.5px black;
-      }
-      .container1 {
-        position: fixed;
-        left: 50px;
-        top: 150px;
-        color: white;
-      }
-      .container2 {
-        position: fixed;
-        left: 300px;
-        top: 150px;
-        color: white;
-      }
-      #label1 {
-        position: relative;
-        right: -15px;
-      }
-      #label2 {
-        position: relative;
-        right: 0px;
-      }
-      #galaxy,
-      #iphone {
-        position: relative;
-        left: 50px;
+        background-size: cover;
+        min-height: 100%;
       }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Phones</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <%- include('partials/_head') %>
   </head>
   <body>
     <%- include('partials/_navbar', {title: 'Category'}) %>
-    <%itemList.map((item, index)=> { %>
-    <div class="container<%= index+1%>">
-      <img src="<%= item.img %>" width="193" height="300" />
-      <br />
-      <label id="label1" class="ml-4 my-2"> <%= item.name%> </label>
-      <br />
-      <button
-        onclick="location.href='/item/<%=item._id%>' "
-        id="<%=item.name%>"
-        class="btn btn-secondary ml-3"
-      >
-        View
-      </button>
+    <div class="container p-3">
+      <div class="display-5 text-white mb-3"><%= category.toUpperCase() %></div>
+      <div class="row">
+        <%itemList.map((item, index)=> { %>
+        <!-- <div class="container<%= index+1%>">
+          <img src="<%= item.img %>" width="193" height="300" />
+          <br />
+          <label id="label1" class="ml-4 my-2"> <%= item.name%> </label>
+          <br />
+          <button
+            onclick="location.href='/item/<%=item._id%>' "
+            id="<%=item.name%>"
+            class="btn btn-secondary ml-3"
+          >
+            View
+          </button>
+        </div> -->
+        <div class="col-md-3 col-sm-6 m-2">
+          <div class="card text-center" style="max-width: 16rem">
+            <img
+              src="<%=item.img%>"
+              class="card-img-top"
+              alt="<%= item.name%>"
+              height="400"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%= item.name %></h5>
+              <button
+                onclick="location.href='/item/<%=item._id%>';"
+                id="<%= item.name%>"
+                class="btn btn-success ml-auto w-100 mt-2"
+              >
+                View
+              </button>
+            </div>
+          </div>
+        </div>
+        <% });%>
+      </div>
     </div>
-    <% });%>
   </body>
 </html>

@@ -1,29 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-  <a class="navbar-brand" style="color: rgb(191, 255, 161)"><%= title %></a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto"></ul>
-    <form method="POST" action="/search" class="form-inline my-2 my-lg-0">
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand lead">GoShop</a>
+    <form method="POST" action="/search" class="d-flex w-50">
       <input
-        class="form-control mr-sm-2"
-        name="search"
+        class="form-control me-2"
         type="search"
         placeholder="Search"
         aria-label="Search"
+        name="search"
+        required
+        oninvalid="this.setCustomValidity('Please enter any search term')"
+        oninput="this.setCustomValidity('')"
       />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Search
+      <button
+        class="btn btn-outline-warning d-flex align-items-center"
+        type="submit"
+      >
+        <i class="fas fa-search">&nbsp;</i>Search
       </button>
     </form>
+    <div>
+      <a href="/cart" id="cart" class="btn btn-success ml-3"
+        ><i class="fas fa-shopping-cart">&nbsp; </i> Cart
+      </a>
+      <a class="btn btn-outline-success" href="/login"
+        ><i class="fas fa-sign-out-alt">&nbsp;</i> Logout</a
+      >
+    </div>
   </div>
 </nav>
+
+<a href="/" class="btn btn-outline-warning" id="home"
+  ><i class="fas fa-home"></i
+></a>
+<style>
+  #home {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 100%;
+    height: 3rem;
+    width: 3rem;
+    display: grid;
+    place-content: center;
+  }
+</style>

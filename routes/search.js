@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     const search = req.body.search;
+
     try {
         const items = await itemModel.find();
         const filteredItems = items.filter((item) => (item.name.toLowerCase()).includes(search.toLowerCase()));
